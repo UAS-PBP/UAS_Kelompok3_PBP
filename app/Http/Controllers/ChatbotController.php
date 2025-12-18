@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Chat;
 
 class ChatbotController extends Controller
-{  
+{
+    
     public function chat(Request $request)
     {
+        
+
+
+ 
         $request->validate([
             'message' => 'required|string'
         ]);
@@ -43,16 +48,16 @@ class ChatbotController extends Controller
         ]);
 
         if (!$response->successful()) {
-            return response()->json([
-                'error' => $response->json(),
-                'status' => $response->status()
-            ], 500);
-        }
+    return response()->json([
+        'error' => $response->json(),
+        'status' => $response->status()
+    ], 500);
+}
 
         $data = $response->json();
 
-        $aiReply = $data['choices'][0]['message']['content']
-            ?? 'Maaf, AI tidak memberikan jawaban.';
+$aiReply = data_get($data, 'choices[0].message.content')
+    ?? 'Maaf, AI tidak memberikan jawaban.';
 
 
         // Simpan balasan AI

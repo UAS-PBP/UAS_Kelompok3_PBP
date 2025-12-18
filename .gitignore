@@ -10,6 +10,7 @@
 /storage/*.key
 /storage/pail
 /vendor
+/chatbot-rekom/node_modules
 .env
 .env.backup
 .env.production

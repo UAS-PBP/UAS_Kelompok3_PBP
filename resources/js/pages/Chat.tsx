@@ -6,72 +6,123 @@ import Rumah from "../assets/rumah.jpg";
 import { router, usePage } from '@inertiajs/react';
 import ChatLayout from '@/component/ChatLayout'
 
+interface Message {
+  id: number;
+  from: "me" | "bot";
+  text: string;
+  time?: string;
+  type?: "options";
+  options?: string[];
+}
 
 function Chat() {
-    const [messages, setMessages] = useState([
-        {id: 1, from:"me", text: "Halo, saya mau bertanya terkait rumah ini", time: "07:30" },
+    const [messages, setMessages] = useState<Message[]>([
         {
-            id: 2,
+            id: 1,
             from: "bot",
             type: "options",
             text: "Halo, selamat datang di HomeLinkID. Silahkan pilih opsi yang Anda inginkan :",
-            time: "07:30",
+            options: [
+                "Bertanya referensi rumah?",
+                "Bertanya mengenai harga yang pas?",
+                "Chat dengan penjual"
+            ],
         }
     ])
      const [input, setInput] = useState("");
-    const sendMessage = () => {
-        if (!input.trim()) return;
+     const [loading, setLoading] = useState(false)
+    const sendMessage = async (customText?: string) => {
+         const messageText = customText ?? input;
+        if (!messageText.trim()) return;
 
-        setMessages([...messages, { id: Date.now(), from: "me", text: input, time: "07:31" }]);
+        const userMessage : Message = {
+            id: Date.now(),
+            from: "me",
+            text: messageText,
+        };
+        setMessages((prev) => [...prev, userMessage]);
         setInput("");
+        setLoading(true);
+        try{
+            const token = document.querySelector('meta[name="csrf-token"]') ?.getAttribute("content");
+
+            const res = await fetch("/chatbot", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": token ?? "",
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+                body: JSON.stringify({ message: messageText }),
+            });
+            const data = await res.json();
+            setMessages((prev) => [
+                ...prev,
+                {
+                    id: Date.now() + 1,
+                    from: "bot",
+                    text: data.reply,
+                },
+            ]);
+        } catch(error) {
+            setMessages((prev) => [
+                ...prev,
+                {
+                    id: Date.now() + 1,
+                    from: "bot",
+                    text: "Maaf, terjadi kesalahan. Silakan coba lagi.",
+                },
+            ]);
+        } finally {
+            setLoading(false);
+        }
     };
+    const handleOptionClick = (option: string) => {
+  sendMessage(option);
+};
+
 
     
   return (
     <ChatLayout>
-      <div className="min-h-screen w-full flex flex-col bg-white pt-[130px] px-20 pb-10">
+      <div className="min-h-screen w-full flex flex-col bg-white pt-[130px] md:px-20 px-5 pb-10 " >
         <div className="flex items-center gap-4 py-4 border-b border-gray-400 ">
             <h2 className="text-2xl font-bold">HOMELINKID</h2>
         </div>
-        <div className="flex-1 p-6 overflow-y-auto">
-            <div className="flex justify-end my-4">
-                <div className="bg-white px-4 py-2 rounded-xl max-w-[60%] border border-gray-400">
-                    Halo saya ingin bertanya
-                </div>
-            </div>
-            <div className="flex justify-start">
-                <div className="bg-white border rounded-xl shadow-sm p-4 w-[400px]">
+        <div className="flex-1 overflow-y-auto space-y-4">
+  {messages.map((msg) => (
+    <div
+      key={msg.id}
+      className={`flex ${msg.from === "me" ? "justify-end" : "justify-start"}`}
+    >
+      <div className="bg-white border rounded-xl px-4 py-2 max-w-[60%] mt-10">
+        <p>{msg.text}</p>
 
-                <p className="mb-3 text-gray-700">
-                 Halo, selamat datang di HomeLinkID. Silahkan pilih opsi yang Anda inginkan :
-                </p>
+        {/* OPTIONS BUTTON */}
+        {msg.type === "options" && msg.options && (
+          <div className="mt-3 space-y-2">
+            {msg.options.map((opt, i) => (
+              <button
+                key={i}
+                onClick={() => handleOptionClick(opt)}
+                className="w-full text-left border rounded-lg px-3 py-2 hover:bg-gray-100"
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+</div>
 
-                <div className="space-y-2">
-                    <button className="flex items-center gap-3 w-full px-3 py-3 border rounded-lg hover:bg-gray-100">
-                        <FontAwesomeIcon icon={faHome} /> Bertanya referensi rumah?
-                    </button>
-                    <button className="flex items-center gap-3 w-full px-3 py-3 border rounded-lg hover:bg-gray-100">
-                        <FontAwesomeIcon icon={faDollar} /> Bertanya mengenai harga yang pas?
-                    </button>
-                    <button className="flex items-center gap-3 w-full px-3 py-3 border rounded-lg hover:bg-gray-100">
-                        <FontAwesomeIcon icon={faPaperPlane} /> Chat dengan penjual
-                    </button>
-                </div>
-                <p className="text-[12px] text-gray-400 mt-2 text-right">Dikirim oleh Asisten AI Toko</p>
-                </div>
-            </div>
-            <div className="flex justify-end mt-4">
-                <div className="bg-white px-4 py-2 rounded-xl max-w-[60%] border border-gray-400">
-                    Chat dengan penjual
-                </div>
-            </div>
-        </div>
         <div className="flex items-center p-4  bg-white gap-3">
             <input className="flex-1 border px-4 py-3 rounded-full" placeholder="Tulis Pesan..." value={input} onChange={(e) => setInput(e.target.value)}/>
             <button className="text-xl">
                 <FontAwesomeIcon icon={faPaperclip} />
             </button>
-            <button className="text-xl text-[#333]" onClick={sendMessage}>
+            <button className="text-xl text-[#333] cursor-pointer" onClick={() => sendMessage(input)}>
                 <FontAwesomeIcon icon={faPaperPlane} />
             </button>
         </div>

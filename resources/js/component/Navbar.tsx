@@ -98,7 +98,7 @@ const Navbar: FC = () => {
         <Link href="/history" className={getLinkClass('/history')}>
           History
         </Link>
-        <Link href="/chatbot" className={getLinkClass('/chatbot')}>
+        <Link href="/chat" className={getLinkClass('/chat')}>
           Chat
         </Link>
       </nav>

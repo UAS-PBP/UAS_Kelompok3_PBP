@@ -29,7 +29,10 @@ Route::get('/home/daftar-properti/deskripsi-rumah/reservasi', function () {
 Route::post('/home/daftar-properti/deskripsi-rumah/reservasi/konfirmasi', [ReservasiSurveyController::class, 'store'])
     ->name('reservasi.store');
 
-Route::post('/chatbot', [ChatbotController::class, 'chat'])->name('chatbot.chat');
+// Bisa untuk GET + POST sekaligus
+Route::post('/chatbot', [ChatbotController::class, 'chat']);
+Route::get('/chat', fn () => Inertia::render('Chat'));
+
 
 /*
 |--------------------------------------------------------------------------
