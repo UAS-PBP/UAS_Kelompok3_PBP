@@ -31,6 +31,7 @@ Tampilan Website HomeLinkID:
 <img width="1910" height="1575" alt="screencapture-127-0-0-1-8000-agen-input-agen-2025-12-18-19_44_21" src="https://github.com/user-attachments/assets/101a18a1-d78d-4f68-900f-c9094a22cfdf" />
 <img width="1910" height="1575" alt="screencapture-127-0-0-1-8000-agen-input-agen-2025-12-18-19_44_21" src="https://github.com/user-attachments/assets/6c8a3fe4-e06c-4274-99e1-e38b1be94f5b" />
 <img width="1910" height="1575" alt="screencapture-127-0-0-1-8000-agen-input-agen-2025-12-18-19_44_21" src="https://github.com/user-attachments/assets/722df9b3-dae6-4128-9c9d-7a2ca4c59c21" />
+<img width="1910" height="2941" alt="screencapture-127-0-0-1-8000-home-home-2025-12-18-19_46_56" src="https://github.com/user-attachments/assets/34eac367-655d-4c32-be09-70d0a74f743d" />
 <img width="1910" height="915" alt="screencapture-127-0-0-1-8000-chat-2025-12-18-19_45_26" src="https://github.com/user-attachments/assets/5460d85e-ef8c-4639-a105-608fc9cf4009" />
 <img width="1919" height="719" alt="image" src="https://github.com/user-attachments/assets/9f5785fa-ad79-4989-8893-787d4bec336a" />
 
