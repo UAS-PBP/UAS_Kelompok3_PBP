@@ -29,9 +29,8 @@ Tampilan Website HomeLinkID:
 <img width="1910" height="2487" alt="screencapture-127-0-0-1-8000-input-rumah-upload-rumah-2025-12-18-19_42_14" src="https://github.com/user-attachments/assets/d2b46a48-1064-4097-a4dc-2ffc7b8f0735" />
 <img width="1919" height="733" alt="image" src="https://github.com/user-attachments/assets/00d9951e-1303-4133-bb9c-35aff9fa2c45" />
 <img width="1910" height="1575" alt="screencapture-127-0-0-1-8000-agen-input-agen-2025-12-18-19_44_21" src="https://github.com/user-attachments/assets/101a18a1-d78d-4f68-900f-c9094a22cfdf" />
-<img width="1910" height="1575" alt="screencapture-127-0-0-1-8000-agen-input-agen-2025-12-18-19_44_21" src="https://github.com/user-attachments/assets/6c8a3fe4-e06c-4274-99e1-e38b1be94f5b" />
-<img width="1910" height="1575" alt="screencapture-127-0-0-1-8000-agen-input-agen-2025-12-18-19_44_21" src="https://github.com/user-attachments/assets/722df9b3-dae6-4128-9c9d-7a2ca4c59c21" />
 <img width="1910" height="2941" alt="screencapture-127-0-0-1-8000-home-home-2025-12-18-19_46_56" src="https://github.com/user-attachments/assets/34eac367-655d-4c32-be09-70d0a74f743d" />
+<img width="1910" height="2090" alt="screencapture-127-0-0-1-8000-promo-2025-12-18-19_48_11" src="https://github.com/user-attachments/assets/803027a0-0c90-43ad-930c-be8fa681a978" />
 <img width="1910" height="915" alt="screencapture-127-0-0-1-8000-chat-2025-12-18-19_45_26" src="https://github.com/user-attachments/assets/5460d85e-ef8c-4639-a105-608fc9cf4009" />
 <img width="1919" height="719" alt="image" src="https://github.com/user-attachments/assets/9f5785fa-ad79-4989-8893-787d4bec336a" />
 
