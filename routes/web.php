@@ -31,7 +31,7 @@ Route::post('/home/daftar-properti/deskripsi-rumah/reservasi/konfirmasi', [Reser
 
 // Bisa untuk GET + POST sekaligus
 Route::post('/chatbot', [ChatbotController::class, 'chat']);
-Route::get('/chat', fn () => Inertia::render('Chat'));
+Route::get('/chat', fn() => Inertia::render('Chat'));
 
 
 /*
@@ -39,21 +39,21 @@ Route::get('/chat', fn () => Inertia::render('Chat'));
 | PUBLIC
 |--------------------------------------------------------------------------
 */
-Route::get('/', fn () => Inertia::render('Welcome'));
-Route::get('/ask', fn () => Inertia::render('Ask'));
-Route::get('/otp-email', fn () => Inertia::render('Otpemail'));
+Route::get('/', fn() => Inertia::render('Welcome'));
+Route::get('/ask', fn() => Inertia::render('Ask'));
+Route::get('/otp-email', fn() => Inertia::render('Otpemail'));
 
 /*
 |--------------------------------------------------------------------------
 | AUTH USER
 |--------------------------------------------------------------------------
 */
-Route::get('/login', fn () => Inertia::render('Login'))->name('login');
+Route::get('/login', fn() => Inertia::render('Login'))->name('login');
 
 Route::post('/login-user', [LoginUser::class, 'login'])
     ->name('login.submit');
 
-Route::get('/signin', fn () => Inertia::render('Signin'))
+Route::get('/signin', fn() => Inertia::render('Signin'))
     ->name('signin.page');
 
 Route::post('/signin', [register::class, 'signin'])
@@ -64,13 +64,13 @@ Route::post('/signin', [register::class, 'signin'])
 | AUTH COMPANY
 |--------------------------------------------------------------------------
 */
-Route::get('/login-company', fn () => Inertia::render('LoginCompany'))
+Route::get('/login-company', fn() => Inertia::render('LoginCompany'))
     ->name('login-company');
 
 Route::post('/login-company', [logincompany::class, 'login'])
     ->name('login-company.submit');
 
-Route::get('/signup-company', fn () => Inertia::render('SignupCompany'))
+Route::get('/signup-company', fn() => Inertia::render('SignupCompany'))
     ->name('signup-company.page');
 
 Route::post('/signup-company', [registercompany::class, 'signup'])
@@ -84,29 +84,26 @@ Route::post('/signup-company', [registercompany::class, 'signup'])
 Route::prefix('company')->group(function () {
 
     // ✅ DASHBOARD LEWAT CONTROLLER
-   Route::get('/dashboard', [CompanyDashboardController::class, 'show'])
-    ->middleware('auth:company')
-    ->name('company.dashboard');
+    Route::get('/dashboard', [CompanyDashboardController::class, 'show'])
+        ->middleware('auth:company')
+        ->name('company.dashboard');
 
-    Route::get('/account-company', fn () => Inertia::render('Accountcompany'));
-    Route::get('/account-company/editaccount-company', fn () => Inertia::render('Editaccountcompany'));
-    Route::get('/account-company/editaccount-company/change-password-company', fn () => Inertia::render('Changepasswordcompany'));
+    Route::get('/account-company', fn() => Inertia::render('Accountcompany'));
+    Route::get('/account-company/editaccount-company', fn() => Inertia::render('Editaccountcompany'));
+    Route::get('/account-company/editaccount-company/change-password-company', fn() => Inertia::render('Changepasswordcompany'));
 });
-Route::get('/account-company', function () {
-    return Inertia::render('Accountcompany'); 
-});
-Route::get('/account-company/editaccount-company', function () {
-    return Inertia::render('Editaccountcompany'); 
-});
-Route::get('/account-company/editaccount-company/change-password-company', function () {
-    return Inertia::render('Changepasswordcompany'); 
-});
+// Route::get('/account-company', function () {
+//   return Inertia::render('Accountcompany');
+// });
+// Route::get('/account-company/editaccount-company', function () {
+//    return Inertia::render('Editaccountcompany');
+// });
+// Route::get('/account-company/editaccount-company/change-password-company', function () {
+//    return Inertia::render('Changepasswordcompany');
+// });
 
 
 
-
-Route::get('/history', [HistoryController::class, 'index'])
-    ->name('history.index');
 
 Route::post('/history', [HistoryController::class, 'store'])
     ->name('history.store');
@@ -114,13 +111,13 @@ Route::post('/history', [HistoryController::class, 'store'])
 // HISTORY
 Route::get('/history', [HistoryController::class, 'index'])
     ->name('history.index');
-Route::post('/favorit/toggle', [FavoritController::class, 'toggle'])->name('favorit.toggle'); //FAVORIT 
+Route::post('/favorit/toggle', [FavoritController::class, 'toggle'])->name('favorit.toggle'); //FAVORIT
 // // Group ini memberi awalan "/home" untuk semua route di dalamnya
 // Route::prefix('home')->group(function () {
 
 //     // Ubah '/home' jadi '/' agar URL-nya: localhost:8000/home
-//     Route::get('/', [HomeController::class, 'index'])->name('home'); 
-    
+//     Route::get('/', [HomeController::class, 'index'])->name('home');
+
 //     // URL: localhost:8000/home/daftar-properti
 //     Route::get('/daftar-properti', fn () => Inertia::render('Daftarproperti'))
 //         ->name('home.properti');
@@ -128,7 +125,7 @@ Route::post('/favorit/toggle', [FavoritController::class, 'toggle'])->name('favo
 //     // URL: localhost:8000/home/daftar-properti/deskripsi-rumah
 //     Route::get('/daftar-properti/deskripsi-rumah/{id}', [HomeController::class, 'show'])
 //         ->name('deskripsi.show');
-//         Route::post('/favorit/toggle', [FavoritController::class, 'toggle'])->name('favorit.toggle'); //FAVORIT 
+//         Route::post('/favorit/toggle', [FavoritController::class, 'toggle'])->name('favorit.toggle'); //FAVORIT
 
 //     // URL: localhost:8000/home/company
 //     Route::get('/company', fn () => Inertia::render('Company'));
@@ -160,30 +157,30 @@ Route::get('/auth/google-company/callback', [logingooglecompany::class, 'callbac
 */
 Route::prefix('home')->group(function () {
 
-    Route::get('/home', [PropertyController::class, 'index'])
-    ->name('home');
+    Route::get('/', [PropertyController::class, 'index'])
+        ->name('home');
 
-    Route::get('/daftar-properti', fn () => Inertia::render('Daftarproperti'))
+    Route::get('/daftar-properti', fn() => Inertia::render('Daftarproperti'))
         ->name('home.properti');
 
-    Route::get('/daftar-properti/deskripsi-rumah', fn () => Inertia::render('Deskripsirumah'));
+    Route::get('/daftar-properti/deskripsi-rumah', fn() => Inertia::render('Deskripsirumah'));
 
-    Route::get('/company', fn () => Inertia::render('Company'));
+    Route::get('/company', fn() => Inertia::render('Company'));
 });/*
 |--------------------------------------------------------------------------
 | PROMO
 |--------------------------------------------------------------------------
 */
-Route::get('/promo', fn () => Inertia::render('Promo'));
-Route::get('/promo/daftar-promo', fn () => Inertia::render('Caripromo'));
+Route::get('/promo', fn() => Inertia::render('Promo'));
+Route::get('/promo/daftar-promo', fn() => Inertia::render('Caripromo'));
 
 // Route::get('/home', function () {
-//     return Inertia::render('Home'); 
+//     return Inertia::render('Home');
 // });
 Route::get('/home/daftar-properti', [PropertyController::class, 'index'])->name('home.daftarproperti');
 
 // Route::get('/home/daftar-properti', function () {
-//     return Inertia::render('Daftarproperti'); 
+//     return Inertia::render('Daftarproperti');
 // });
 // Route::get('/home/daftar-properti/deskripsi-rumah', function () {
 //     return Inertia::render('Deskripsirumah');
@@ -197,8 +194,8 @@ Route::get('/home/daftar-properti/deskripsi-rumah/{id}', [PropertyController::cl
 | USER ACCOUNT
 |--------------------------------------------------------------------------
 */
-Route::get('/account', fn () => Inertia::render('Account'));
-Route::get('/account/change-password', fn () => Inertia::render('Changepassword'));
+Route::get('/account', fn() => Inertia::render('Account'));
+Route::get('/account/change-password', fn() => Inertia::render('Changepassword'));
 
 /*
 |--------------------------------------------------------------------------
@@ -221,13 +218,13 @@ Route::get('/input-rumah/upload-rumah', [RumahController::class, 'create'])
 
 
 Route::get('/agen', [AgenController::class, 'index']);
-Route::get('/agen/input-agen', fn () => Inertia::render('Inputagent'));
+Route::get('/agen/input-agen', fn() => Inertia::render('Inputagent'));
 Route::post('/agen', [AgenController::class, 'store']);
 
 
 Route::get(
     '/home/daftar-properti/deskripsi-rumah/reservasi',
-    fn () => Inertia::render('Reservasi')
+    fn() => Inertia::render('Reservasi')
 )->name('reservasi.form');
 
 // SIMPAN + KONFIRMASI
@@ -246,8 +243,3 @@ Route::get('/home/company/category', [CompanyController::class, 'category']);
 
 Route::get('/home/company/{company}', [CompanyController::class, 'show'])
     ->name('company.show');
-
-
-
-
-
